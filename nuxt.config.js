@@ -50,6 +50,16 @@ export default defineNuxtConfig({
 		"@nuxt/eslint",
 	],
 
+	fonts: {
+		families: [
+			{ name: "Martel", provider: "google" },
+			{ name: "Source Sans", provider: "google" },
+		],
+		experimental: {
+			processCSSVariables: true,
+		},
+	},
+
 	vite: {
 		css: {
 			preprocessorOptions: {
@@ -86,7 +96,7 @@ export default defineNuxtConfig({
 		],
 	},
 
-	// routeRules: {
-	// 	"/": { isr: 3600 },
-	// },
+	routeRules: {
+		"/": { isr: 3600 },
+	},
 });
