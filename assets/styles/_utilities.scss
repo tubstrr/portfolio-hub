@@ -1,0 +1,16 @@
+@use "variables/sizing" as *;
+@use "variables/breakpoints" as *;
+
+.container {
+  width: min($container-min, $container-max);
+  margin: 0 auto;
+
+  > .inner-container {
+    width: min($inner-container-min, $inner-container-max);
+    margin: auto;
+  }
+}
+
+.block {
+  padding: var(--padding) 0;
+}

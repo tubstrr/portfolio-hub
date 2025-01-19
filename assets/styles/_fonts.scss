@@ -1,0 +1,55 @@
+// Variables
+$font-ratio: 1.2;
+
+@mixin base-headline {
+  font-family: "Martel", serif;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+@mixin base-font {
+  font-family: "Source Sans", serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  color: var(--text);
+}
+
+html {
+  font-size: 18px;
+
+  strong {
+    font-weight: 500;
+    * {
+      font-weight: 500;
+    }
+  }
+
+  @for $i from 1 through 6 {
+    h#{$i},
+    *.h#{$i} {
+      @include base-headline;
+
+      font-size: 1rem * pow($font-ratio, 7 - $i);
+
+      * {
+        @include base-headline;
+        font-size: 1rem * pow($font-ratio, 7 - $i);
+      }
+
+      // @if $i == 1 {
+      //   font-size: 2rem;
+      // }
+    }
+  }
+
+  * {
+    @include base-font;
+    * {
+      @include base-font;
+    }
+  }
+}

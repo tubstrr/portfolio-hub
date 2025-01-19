@@ -1,23 +1,25 @@
-# NuxtHub Starter Template
+# Nuxt Minimal Starter
 
-This starter lets you get started with [NuxtHub](https://hub.nuxt.com) in seconds.
-
-- [Documentation](https://hub.nuxt.com)
-
-## Features
-
-- Image upload with [`hubBlob()`](http://hub.nuxt.com/docs/storage/blob)
-- Save chat messages with [`hubDatabase()`](http://hub.nuxt.com/docs/storage/database)
-- Save server redirects with [`hubKV()`](http://hub.nuxt.com/docs/storage/kv)
-- Cache an API response with [`cachedEventHandler()`](https://hub.nuxt.com/docs/server/cache)
-- Generate the API documentation with Scalar within the [NuxtHub Admin](https://admin.hub.nuxt.com)
+Look at the
+[Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to
+learn more.
 
 ## Setup
 
-Make sure to install the dependencies with [pnpm](https://pnpm.io).
+Make sure to install dependencies:
 
 ```bash
+# npm
+npm install
+
+# pnpm
 pnpm install
+
+# yarn
+yarn install
+
+# bun
+bun install
 ```
 
 ## Development Server
@@ -25,7 +27,17 @@ pnpm install
 Start the development server on `http://localhost:3000`:
 
 ```bash
+# npm
+npm run dev
+
+# pnpm
 pnpm dev
+
+# yarn
+yarn dev
+
+# bun
+bun run dev
 ```
 
 ## Production
@@ -33,20 +45,35 @@ pnpm dev
 Build the application for production:
 
 ```bash
+# npm
+npm run build
+
+# pnpm
 pnpm build
+
+# yarn
+yarn build
+
+# bun
+bun run build
 ```
 
-Check out the [deployment documentation](https://hub.nuxt.com/docs/getting-started/deploy) for more information.
-
-## Deploy
-
-Deploy the application on the Edge with [NuxtHub](https://hub.nuxt.com) on your Cloudflare account:
+Locally preview production build:
 
 ```bash
-npx nuxthub deploy
+# npm
+npm run preview
+
+# pnpm
+pnpm preview
+
+# yarn
+yarn preview
+
+# bun
+bun run preview
 ```
 
-Then checkout your server logs, analaytics and more in the [NuxtHub Admin](https://admin.hub.nuxt.com).
-
-You can also deploy using [Cloudflare Pages CI](https://hub.nuxt.com/docs/getting-started/deploy#cloudflare-pages-ci).
-
+Check out the
+[deployment documentation](https://nuxt.com/docs/getting-started/deployment) for
+more information.

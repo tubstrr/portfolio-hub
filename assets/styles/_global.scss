@@ -1,0 +1,51 @@
+.theme-button {
+  position: relative;
+
+  color: var(--blue);
+  transition: color 300ms ease-in-out;
+
+  * {
+    color: var(--blue);
+    transition: color 300ms ease-in-out;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    // right: 0%;
+    left: -1%;
+    bottom: -0.1em;
+    height: 0.075em;
+    width: 102%;
+    background: linear-gradient(
+      to right,
+      var(--pink),
+      var(--pink),
+      var(--blue),
+      var(--blue)
+    );
+    background-size: 400% 100%;
+    background-repeat: no-repeat;
+    background-position: 100% 0;
+    transition: 300ms ease-in-out;
+  }
+
+  &:hover {
+    color: var(--pink);
+
+    * {
+      color: var(--pink);
+    }
+
+    &::after {
+      height: 0.2em;
+      width: 100%;
+      left: 0;
+      background-position: 0 0;
+    }
+  }
+}
+
+* {
+  transition: 500ms ease-in-out;
+}
