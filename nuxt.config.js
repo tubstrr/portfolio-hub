@@ -86,7 +86,7 @@ export default defineNuxtConfig({
 		],
 	},
 
-	routeRules: {
-		"/": { isr: 3600 },
-	},
+	// routeRules: {
+	// 	"/": { isr: 3600 },
+	// },
 });
