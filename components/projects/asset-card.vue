@@ -10,16 +10,26 @@ const { video_url } = defineProps({
 
 const showVideo = ref(false);
 
+const checkURL = (url) => {
+  return window.assetsResolved && window.assetsResolved[url] || false;
+};
+
 const allowVideo = computed(() => {
   if (import.meta.server) return false;
   const hasClass = document.documentElement.classList.contains(
     "force-asset-preload",
   );
-  return hasClass || showVideo.value;
+
+  const hasVideo = checkURL(`/projects/${video_url}`);
+
+  return hasClass || showVideo.value || hasVideo;
 });
 
 $bus.on("force-asset-preload-finished", () => {
   showVideo.value = true;
+});
+$bus.on("asset-resolved", (payload) => {
+  if (payload === `/projects/${video_url}`) showVideo.value = true;
 });
 
 const mp4ToWebP = (url) => {

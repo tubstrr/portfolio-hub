@@ -10,24 +10,34 @@ import { categories } from "@/assets/cms";
 const hasStarted = ref(false);
 
 // Methods
+const resolveURL = (url) => {
+  $bus.emit("asset-resolved", url);
+  window.assetsResolved[url] = true;
+};
+
 const forceLoadImage = async (url) => {
   const img = new Image();
+  window.assetsResolved[url] = false;
   img.src = url;
-  return img.complete ? Promise.resolve() : new Promise((resolve) => {
+
+  return new Promise((resolve) => {
     img.onload = resolve;
     img.onerror = resolve;
     img.onabort = resolve;
+    resolveURL(url);
   });
 };
 
 const forceLoadVideo = async (url) => {
   const video = document.createElement("video");
+  window.assetsResolved[url] = false;
   video.src = url;
   return new Promise((resolve) => {
     video.oncanplaythrough = resolve;
     video.load();
     video.onabort = resolve;
     video.onerror = resolve;
+    resolveURL(url);
   });
 };
 
@@ -35,8 +45,8 @@ const forceAssetPreload = () => {
   if (hasStarted.value) return;
   hasStarted.value = true;
   $bus.emit("force-asset-preload-start");
+  window.assetsResolved = {};
 
-  console.log(categories);
   const video_assets = [];
   const posters_assets = [];
 
@@ -62,14 +72,12 @@ const forceAssetPreload = () => {
   }
 
   loadAssets().then(() => {
-    console.log("Forcing asset preload");
     $bus.emit("force-asset-preload-finished");
     document.documentElement.classList.add("force-asset-preload");
   });
 };
 
 const setViewPort = () => {
-  console.log("Setting viewport");
   const root = document.documentElement;
   root.style.setProperty("--vh", `${window.innerHeight / 100}px`);
   root.style.setProperty("--vw", `${window.innerWidth / 100}px`);
@@ -79,7 +87,6 @@ const setViewPort = () => {
 setupTheme();
 
 onMounted(() => {
-  console.log("App mounted");
   window.addEventListener("scroll", forceAssetPreload);
   window.addEventListener("resize", setViewPort);
   setViewPort();
