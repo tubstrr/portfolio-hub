@@ -12,6 +12,7 @@ export const whichTheme = (mode) => {
 };
 
 export const updateTheme = (mode = "light", flip = false) => {
+  const { $bus } = useNuxtApp();
   const themeCookie = useCookie("theme", DEFAULT_THEME);
   const userTheme = useCookie("user_theme", false);
   userTheme.value = true;
@@ -24,6 +25,8 @@ export const updateTheme = (mode = "light", flip = false) => {
     document.documentElement.classList.remove("light-mode", "dark-mode");
     document.documentElement.classList.add(whichTheme(themeCookie.value));
   }
+
+  $bus.emit("theme:change", themeCookie.value);
 };
 
 export const useTheme = () => {

@@ -35,6 +35,11 @@ $bus.on("asset-resolved", (payload) => {
 const mp4ToWebP = (url) => {
   return url.replace(".mp4", ".webp");
 };
+
+onBeforeUnmount(() => {
+  $bus.off("force-asset-preload-finished");
+  $bus.off("asset-resolved");
+});
 </script>
 
 <!-- https://frame-extractor.com/ s -->

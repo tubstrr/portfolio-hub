@@ -12,5 +12,7 @@ const { name } = defineProps(["name"]);
 .block {
   max-width: calc(100 * var(--vw));
   overflow: clip;
+  position: relative;
+  z-index: 1;
 }
 </style>

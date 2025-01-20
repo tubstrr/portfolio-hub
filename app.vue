@@ -77,19 +77,11 @@ const forceAssetPreload = () => {
   });
 };
 
-const setViewPort = () => {
-  const root = document.documentElement;
-  root.style.setProperty("--vh", `${window.innerHeight / 100}px`);
-  root.style.setProperty("--vw", `${window.innerWidth / 100}px`);
-};
-
 // Lifecycle
 setupTheme();
 
 onMounted(() => {
   window.addEventListener("scroll", forceAssetPreload);
-  // window.addEventListener("resize", setViewPort);
-  // setViewPort();
 });
 </script>
 
@@ -99,6 +91,7 @@ onMounted(() => {
 
     <Header />
     <main id="main" tabindex="-1">
+      <Blobs />
       <Hero />
       <Projects />
       <Bio />
