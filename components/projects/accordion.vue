@@ -391,10 +391,13 @@ const makeColorsString = (project) => {
         .projects {
           .project {
             aspect-ratio: 16/9;
-            margin-top: 5rem;
             display: flex;
             align-content: flex-end;
             width: 100%;
+            .project {
+              margin-top: 5rem;
+            }
+
             a {
               h3 {
                 font-weight: 500;
