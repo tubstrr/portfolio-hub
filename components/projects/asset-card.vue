@@ -68,21 +68,10 @@ onBeforeUnmount(() => {
   border-radius: 0.25rem;
   box-shadow: 5px 10px 15px -10px var(--alt-background);
 
-  .theme-image {
+  .theme-image, video {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    // position: absolute;
-    // top: 0;
-    // left: 0;
-  }
-  video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    // position: absolute;
-    // top: 0;
-    // left: 0;
   }
 }
 </style>

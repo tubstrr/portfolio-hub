@@ -304,8 +304,7 @@ const message = (name) => {
 
           &.active {
             .tmp-asset {
-              opacity: 0.5;
-              opacity: 0.8;
+              opacity: 1;
             }
             a {
               h3 {
