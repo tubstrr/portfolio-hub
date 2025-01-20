@@ -11,6 +11,7 @@
 
 <style lang="scss">
 #block-projects {
+  overflow: visible;
   margin-top: calc(var(--vh, 1vh) * 100);
   .container {
     .inner-container {

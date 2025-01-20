@@ -203,21 +203,26 @@ const message = (name) => {
     padding: 0;
     margin: 0;
     transition: 850ms ease;
+    position: relative;
 
     .panels-enter-active,
     .panels-leave-active {
       transition: 850ms ease;
+      pointer-events: none;
+      user-select: none;
+      position: absolute;
+      width: 100%;
     }
 
     .panels-enter-from,
     .panels-leave-to {
       opacity: 0;
       transform: translateX(10%);
-      position: absolute;
       top: 0;
+      left: 0;
     }
     .panels-enter-from {
-      transform: translateX(-10%);
+      transform: translateX(10%);
     }
 
     .panel {
