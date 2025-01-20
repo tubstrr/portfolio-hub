@@ -116,10 +116,12 @@ onMounted(() => {
 
 #root, html {
   // background: var(--white);
-  // background: var(--background);
+  background: var(--header-background);
+  body {}
 }
 
 #main {
+  background: var(--background);
   position: relative;
 
   section.section {
