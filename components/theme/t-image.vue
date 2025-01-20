@@ -61,11 +61,6 @@ const {
     required: false,
     default: false,
   },
-  sizes: {
-    type: String,
-    required: false,
-    default: "100vw",
-  },
 });
 
 const loadingValue = lazy ? "lazy" : "eager";
@@ -126,7 +121,6 @@ const baseModifier = {
       :src="url"
       :alt="alt || image.alt || null"
       :modifiers='{ ...baseModifier, w: 10, h: "auto", q: 1 }'
-      :sizes="sizes"
     />
     <nuxt-picture
       v-if="hasImage && shouldPreload"
@@ -135,8 +129,8 @@ const baseModifier = {
       :alt="alt || image.alt || null"
       class="full-sized-image"
       :modifiers="{ ...baseModifier }"
-      :sizes="sizes"
-    />
+      />
+      <!-- :sizes="sizes" -->
     <nuxt-picture
       v-if="hasImage && !shouldPreload"
       loading="eager"

@@ -7,7 +7,7 @@ import { bioHTML } from "@/assets/cms";
   <Block name="bio">
     <div class="media-wrapper">
       <div class="media">
-        <img src="/me.webp" />
+        <TImage src="/me.webp" />
       </div>
     </div>
     <div class="container">
@@ -64,22 +64,22 @@ import { bioHTML } from "@/assets/cms";
     position: absolute;
     width: 100%;
     height: 100%;
-  }
-  .media {
-    position: sticky;
-    top: 6rem;
-    left: 100%;
-    width: 50%;
-    height: auto;
-    aspect-ratio: 15 / 11;
-    z-index: 0;
-    filter: grayscale(1);
-
-    img {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+    .media {
+      position: sticky;
+      top: 6rem;
+      left: 100%;
+      width: 50%;
+      height: auto;
+      aspect-ratio: 15 / 11;
+      z-index: 0;
+      filter: grayscale(1);
+  
+      .theme-image {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
     }
   }
 }

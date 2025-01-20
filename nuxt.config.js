@@ -53,7 +53,7 @@ export default defineNuxtConfig({
 	fonts: {
 		families: [
 			{ name: "Martel", provider: "google" },
-			{ name: "Source Sans", provider: "google" },
+			{ name: "Source Sans 3", provider: "google" },
 		],
 		experimental: {
 			processCSSVariables: true,
