@@ -298,6 +298,10 @@ const makeColorsString = (project) => {
           .project-card-enter-active,
           .project-card-leave-active {
             transition: 850ms ease;
+            left: unset !important;
+            scale: 1 !important;
+            opacity: 1 !important;
+            filter: blur(0px) grayscale(0) !important;
           }
 
           .project-card-enter-from,
@@ -397,7 +401,7 @@ const makeColorsString = (project) => {
                 letter-spacing: -0.05em;
                 margin-left: 0;
                 padding-left: 0;
-                color: var(--project-color);
+                // color: var(--project-color);
                 &::before {
                   opacity: 0;
                   left: 0;
@@ -413,8 +417,8 @@ const makeColorsString = (project) => {
               --width: calc(var(--vw) * 65);
               left: 0;
               top: 0;
-              transform: translate(0, calc(-100% - 1rem));
-              opacity: 1;
+              transform: translate(0, calc(-100% - 1rem)) !important;
+              opacity: 1 !important;
             }
 
             &.in-active {
@@ -425,6 +429,35 @@ const makeColorsString = (project) => {
 
             + .project {
               margin-top: 5rem;
+            }
+
+            .project-card-enter-active,
+            .project-card-leave-active {
+              transition: 0ms ease !important;
+              clip-path: polygon(
+                -100% -100%,
+                200% -100%,
+                200% 200%,
+                -100% 200%
+              ) !important;
+              transform: translate(0, calc(-100% - 1rem)) !important;
+              .tmp-asset {
+                transform: translate(0, calc(-100% - 1rem)) !important;
+              }
+            }
+            .project-card-enter-from,
+            .project-card-leave-to {
+              opacity: 1;
+              transform: translate(0, calc(-100% - 1rem)) !important;
+              clip-path: polygon(
+                -100% -100%,
+                200% -100%,
+                200% 200%,
+                -100% 200%
+              );
+              .tmp-asset {
+                transform: translate(0, calc(-100% - 1rem)) !important;
+              }
             }
           }
         }
