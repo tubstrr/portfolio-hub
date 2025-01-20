@@ -116,7 +116,7 @@ onMounted(() => {
 
 #root, html {
   // background: var(--white);
-  background: var(--background);
+  // background: var(--background);
 }
 
 #main {
