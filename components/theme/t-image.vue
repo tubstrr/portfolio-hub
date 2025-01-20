@@ -129,8 +129,8 @@ const baseModifier = {
       :alt="alt || image.alt || null"
       class="full-sized-image"
       :modifiers="{ ...baseModifier }"
-      />
-      <!-- :sizes="sizes" -->
+    />
+    <!-- :sizes="sizes" -->
     <nuxt-picture
       v-if="hasImage && !shouldPreload"
       loading="eager"

@@ -75,7 +75,7 @@ import { bioHTML } from "@/assets/cms";
       aspect-ratio: 15 / 11;
       z-index: 0;
       filter: grayscale(1);
-  
+
       .theme-image {
         position: absolute;
         width: 100%;
@@ -85,10 +85,10 @@ import { bioHTML } from "@/assets/cms";
     }
   }
 
-  @media(max-width: $mobile) {
+  @media (max-width: $tablet) {
     .container {
-              grid-template-columns: 1fr;
-        padding-bottom: 0;
+      grid-template-columns: 1fr;
+      padding-bottom: 0;
     }
 
     .media-wrapper {

@@ -28,23 +28,25 @@ const forceLoadVideo = async (url) => {
     video.load();
     video.onabort = resolve;
     video.onerror = resolve;
-  })
+  });
 };
 
 const forceAssetPreload = () => {
-  if (hasStarted.value) return
+  if (hasStarted.value) return;
   hasStarted.value = true;
   $bus.emit("force-asset-preload-start");
 
-  console.log(categories)
+  console.log(categories);
   const video_assets = [];
   const posters_assets = [];
-  
+
   for (const category of categories) {
     for (const project of category.projects) {
       if (project.video_url) {
         video_assets.push(`/projects/${project.video_url}`);
-        posters_assets.push(`/projects/${project.video_url.replace(".mp4", ".webp")}`);
+        posters_assets.push(
+          `/projects/${project.video_url.replace(".mp4", ".webp")}`,
+        );
       }
     }
   }
@@ -64,21 +66,20 @@ const forceAssetPreload = () => {
     $bus.emit("force-asset-preload-finished");
     document.documentElement.classList.add("force-asset-preload");
   });
-}
+};
 
 const setViewPort = () => {
-  console.log("Setting viewport")
-  const root  = document.documentElement;
+  console.log("Setting viewport");
+  const root = document.documentElement;
   root.style.setProperty("--vh", `${window.innerHeight / 100}px`);
   root.style.setProperty("--vw", `${window.innerWidth / 100}px`);
 };
-
 
 // Lifecycle
 setupTheme();
 
 onMounted(() => {
-  console.log("App mounted")
+  console.log("App mounted");
   window.addEventListener("scroll", forceAssetPreload);
   window.addEventListener("resize", setViewPort);
   setViewPort();

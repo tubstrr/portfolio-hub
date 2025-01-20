@@ -77,6 +77,7 @@ const menuClass = computed(() => {
             <button
               title="Scroll to the hero"
               @click='scrollTo("block-hero", "nav")'
+              style="--symbol: '👋'"
             >
               Intro
             </button>
@@ -85,14 +86,16 @@ const menuClass = computed(() => {
             <button
               title="Scroll to the projects"
               @click='scrollTo("block-projects", "nav")'
+              style="--symbol: '👈'"
             >
-              Projects
+              Portfolio
             </button>
           </li>
           <li>
             <button
               title="Scroll to the bio"
               @click='scrollTo("block-bio", "nav")'
+              style="--symbol: '😊'"
             >
               Bio
             </button>
@@ -112,7 +115,7 @@ const menuClass = computed(() => {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: calc(var(--vw) * 100);
   background: var(--header-background);
   padding: 1rem 0;
   // border-bottom: var(--border);
@@ -183,11 +186,11 @@ const menuClass = computed(() => {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            top: calc(50% + -0.2rem - (var(--height) / 2));
+            top: calc(50% + -0.2rem - var(--height) / 2);
             transition: var(--transition);
 
             &.two {
-              top: calc(50% + 0.2rem - (var(--height) / 2));
+              top: calc(50% + 0.2rem - var(--height) / 2);
             }
           }
         }
@@ -195,7 +198,7 @@ const menuClass = computed(() => {
           &:hover {
             .pill {
               transform: translate(-50%) rotate(-90deg);
-              top: calc(50% - (var(--height) / 2));
+              top: calc(50% - var(--height) / 2);
               &.two {
                 transform: translate(-50%) rotate(0deg);
               }
@@ -204,10 +207,10 @@ const menuClass = computed(() => {
         }
         &.open {
           .pill {
-            top: calc(50% - (var(--height) / 2));
+            top: calc(50% - var(--height) / 2);
             transform: translate(-50%) rotate(-135deg);
             &.two {
-              top: calc(50% - (var(--height) / 2));
+              top: calc(50% - var(--height) / 2);
               transform: translate(-50%) rotate(-45deg);
             }
           }
@@ -255,11 +258,31 @@ const menuClass = computed(() => {
             text-transform: uppercase;
             letter-spacing: 0.1em;
             font-size: 1rem;
-            font-weight: 700;
+            font-weight: 400;
+            position: relative;
+            padding-right: 1.5em;
+
+            &::after {
+              content: var(--symbol);
+              position: absolute;
+              right: -1em;
+              opacity: 0;
+              transition: 300ms ease;
+            }
           }
 
           + li {
             margin-top: 1rem;
+          }
+
+          &:hover {
+            button {
+              font-weight: 900;
+              &::after {
+                opacity: 1;
+                right: 0;
+              }
+            }
           }
         }
       }

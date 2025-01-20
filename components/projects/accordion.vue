@@ -7,6 +7,7 @@ const activeProject = ref(categories[0].projects[0].id);
 const activeCategory = ref(categories[0].id);
 const panels = ref(null);
 const debounceTimer = ref(null);
+const tabsRef = ref(null);
 
 // Methods
 const setActiveCategory = (id) => {
@@ -17,6 +18,13 @@ const setActiveCategory = (id) => {
       categories.find((category) => category.id === id).projects[0].id,
     );
   }, 100);
+
+  // Scroll to active category
+  const scrollToValue = tabsRef.value.querySelector(`#${id}`).offsetLeft;
+  tabsRef.value.scrollTo({
+    left: scrollToValue,
+    behavior: "smooth",
+  });
 };
 
 const setActiveProject = (id) => {
@@ -48,10 +56,11 @@ const makeColorsString = (project) => {
 
 <template>
   <div class="project-accordion">
-    <ul class="tabs">
+    <ul class="tabs" ref="tabsRef">
       <li
         v-for="category in categories"
         :key="category.id"
+        :id="category.id"
         :class='activeCategory === category.id ? "active" : "in-active"'
       >
         <button @click="setActiveCategory(category.id)" class="h6">
@@ -99,6 +108,8 @@ const makeColorsString = (project) => {
 </template>
 
 <style lang="scss">
+@use "@/assets/styles/variables/breakpoints" as *;
+
 .project-accordion {
   display: flex;
   justify-content: space-between;
@@ -227,14 +238,19 @@ const makeColorsString = (project) => {
             h3 {
               text-shadow: 0px 0px 20px var(--background);
               transition: var(--transition);
-              margin-left: calc(-1em + -0.5rem);
+              margin-left: -0.5rem;
               position: relative;
+              padding-left: 0em;
 
               &::before {
                 content: "👉";
                 margin-right: 0.5rem;
                 opacity: 0;
                 transition: var(--transition);
+                position: absolute;
+                top: 0;
+                left: -1.5em;
+                rotate: 15deg;
               }
               &::after {
                 content: "";
@@ -260,16 +276,19 @@ const makeColorsString = (project) => {
           &.active {
             .tmp-asset {
               opacity: 0.5;
-              opacity: .8;
+              opacity: 0.8;
             }
             a {
               h3 {
                 font-weight: 500;
                 letter-spacing: -0.05em;
                 margin-left: 0;
+                padding-left: 1.25em;
                 color: var(--project-color);
                 &::before {
                   opacity: 1;
+                  left: 0;
+                  rotate: 0deg;
                 }
               }
             }
@@ -312,6 +331,72 @@ const makeColorsString = (project) => {
       }
     }
   }
+
+  @media screen and (max-width: $tablet) {
+    flex-direction: column;
+    .tabs {
+      width: auto;
+      display: flex;
+      scroll-snap-type: x mandatory;
+      overflow-x: auto;
+      gap: 1rem;
+      padding-bottom: 1rem;
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      align-items: flex-start;
+      scrollbar-width: none;
+      position: relative;
+
+      li {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: baseline;
+
+        width: calc(var(--vw) * 30);
+        // flex: 0 0 40%;
+        min-width: max-content;
+        scroll-snap-align: center;
+
+        button {
+          padding: 0;
+          font-size: 1rem;
+          width: max-content;
+          display: inline-block;
+          margin: auto;
+        }
+        + li {
+          margin-top: 0;
+        }
+
+        &.active {
+          button {
+            margin-left: auto;
+            letter-spacing: unset;
+          }
+        }
+      }
+    }
+
+    .panels {
+      .panel {
+        .projects {
+          a {
+            h3 {
+              font-size: 1.25rem;
+              font-weight: 900;
+              max-width: 100%;
+            }
+          }
+          // &.active {
+          // }
+        }
+      }
+    }
+  }
 }
 .dark-mode {
   .project-accordion {
@@ -337,6 +422,18 @@ const makeColorsString = (project) => {
         }
       }
     }
+  }
+}
+
+@keyframes pulse {
+  0% {
+    width: 5%;
+  }
+  50% {
+    width: 20%;
+  }
+  100% {
+    width: 5%;
   }
 }
 </style>

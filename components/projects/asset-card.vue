@@ -1,5 +1,5 @@
 <script setup>
-const {$bus} = useNuxtApp();
+const { $bus } = useNuxtApp();
 
 const { video_url } = defineProps({
   video_url: {
@@ -12,7 +12,9 @@ const showVideo = ref(false);
 
 const allowVideo = computed(() => {
   if (import.meta.server) return false;
-  const hasClass = document.documentElement.classList.contains("force-asset-preload");
+  const hasClass = document.documentElement.classList.contains(
+    "force-asset-preload",
+  );
   return hasClass || showVideo.value;
 });
 
@@ -28,7 +30,13 @@ const mp4ToWebP = (url) => {
 <!-- https://frame-extractor.com/ s -->
 <template>
   <div class="asset-card">
-    <video v-if="allowVideo" muted autoplay loop :poster="`/projects/${mp4ToWebP(video_url)}`" >
+    <video
+      v-if="allowVideo"
+      muted
+      autoplay
+      loop
+      :poster="`/projects/${mp4ToWebP(video_url)}`"
+    >
       <source :src="`/projects/${video_url}`" type="video/mp4" />
     </video>
     <TImage v-else :src="`/projects/${mp4ToWebP(video_url)}`" />
