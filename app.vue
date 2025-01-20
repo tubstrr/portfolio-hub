@@ -88,8 +88,8 @@ setupTheme();
 
 onMounted(() => {
   window.addEventListener("scroll", forceAssetPreload);
-  window.addEventListener("resize", setViewPort);
-  setViewPort();
+  // window.addEventListener("resize", setViewPort);
+  // setViewPort();
 });
 </script>
 
@@ -112,12 +112,14 @@ onMounted(() => {
 
 :root {
   --vw: 1vw;
+  --vh: calc(
+    (100vh - env(safe-area-inset-bottom) - env(safe-area-inset-top)) / 100
+  );
 }
 
 #root, html {
   // background: var(--white);
   background: var(--header-background);
-  body {}
 }
 
 #main {

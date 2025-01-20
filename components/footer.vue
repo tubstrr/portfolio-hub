@@ -33,7 +33,6 @@
 
 .block.footer {
   background: var(--header-background);
-  margin-top: 16rem;
   padding: 3rem 0;
   border-top: var(--border);
 

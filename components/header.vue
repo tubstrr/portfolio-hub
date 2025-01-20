@@ -28,7 +28,10 @@ const scrollTo = (position, offset = 0) => {
 
   if (offset === "nav") {
     offset = document.getElementById("navigation").offsetHeight;
-    menuOpened.value = false;
+    setTimeout(() => {
+      closeMenu();
+    }, 750);
+    // menuOpened.value = false;
   }
 
   window.scrollTo({

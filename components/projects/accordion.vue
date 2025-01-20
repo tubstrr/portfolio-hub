@@ -52,6 +52,25 @@ const makeColorsString = (project) => {
     --dark-color:${darkColor};
   `;
 };
+
+const message = (name) => {
+  const messages = [
+    "Check it out!",
+    "Wanna see?",
+    "See it now!",
+    "Explore it!",
+    "Have a look!",
+    "Check this out!",
+    "See more!",
+    "Peak under the hood!",
+    "Let’s go!",
+    "Discover more!",
+    "Take a look!",
+  ];
+
+  const hash = name.length % messages.length;
+  return messages[hash];
+};
 </script>
 
 <template>
@@ -98,7 +117,12 @@ const makeColorsString = (project) => {
                 </div>
               </Transition>
               <TLink :href="project.url" target="_blank">
-                <THtml :html="project.name" tag="h3" />
+                <h3
+                  v-html="
+                    project.name +
+                    `<span class='learn-more'>👉 ${message(project.name)}</span>`
+                  "
+                />
               </TLink>
             </div>
           </li>
@@ -267,6 +291,10 @@ const makeColorsString = (project) => {
               }
             }
 
+            .learn-more {
+              display: none;
+            }
+
             &:hover {
               h3 {
                 font-weight: 800;
@@ -298,10 +326,6 @@ const makeColorsString = (project) => {
           .project-card-enter-active,
           .project-card-leave-active {
             transition: 850ms ease;
-            left: unset !important;
-            scale: 1 !important;
-            opacity: 1 !important;
-            filter: blur(0px) grayscale(0) !important;
           }
 
           .project-card-enter-from,
@@ -415,6 +439,10 @@ const makeColorsString = (project) => {
                 font-weight: 900;
                 max-width: 100%;
               }
+              .learn-more {
+                display: block;
+                font-size: 0.7rem;
+              }
             }
 
             .tmp-asset {
@@ -455,6 +483,10 @@ const makeColorsString = (project) => {
                 200% 200%,
                 -100% 200%
               ) !important;
+              left: unset !important;
+              scale: 1 !important;
+              opacity: 1 !important;
+              filter: blur(0px) grayscale(0) !important;
               .tmp-asset {
                 transform: translate(0) !important;
               }
