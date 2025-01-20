@@ -392,11 +392,9 @@ const makeColorsString = (project) => {
           .project {
             aspect-ratio: 16/9;
             display: flex;
-            align-content: flex-end;
+            justify-content: flex-end;
             width: 100%;
-            .project {
-              margin-top: 5rem;
-            }
+            flex-direction: column;
 
             a {
               h3 {
@@ -404,7 +402,10 @@ const makeColorsString = (project) => {
                 letter-spacing: -0.05em;
                 margin-left: 0;
                 padding-left: 0;
-                // color: var(--project-color);
+                color: var(--project-color);
+                position: absolute;
+                top: 100%;
+
                 &::before {
                   opacity: 0;
                   left: 0;
@@ -420,7 +421,7 @@ const makeColorsString = (project) => {
               --width: calc(var(--vw) * 65);
               left: 0;
               top: 0;
-              transform: translate(0, calc(-100% - 1rem)) !important;
+              transform: translate(0) !important;
               opacity: 1 !important;
             }
 
@@ -430,8 +431,19 @@ const makeColorsString = (project) => {
               }
             }
 
+            &.active {
+              a {
+                h3 {
+                  padding-left: 0;
+                  &::before {
+                    opacity: 0;
+                  }
+                }
+              }
+            }
+
             + .project {
-              margin-top: 5rem;
+              margin-top: 7rem;
             }
 
             .project-card-enter-active,
@@ -443,15 +455,13 @@ const makeColorsString = (project) => {
                 200% 200%,
                 -100% 200%
               ) !important;
-              transform: translate(0, calc(-100% - 1rem)) !important;
               .tmp-asset {
-                transform: translate(0, calc(-100% - 1rem)) !important;
+                transform: translate(0) !important;
               }
             }
             .project-card-enter-from,
             .project-card-leave-to {
               opacity: 1;
-              transform: translate(0, calc(-100% - 1rem)) !important;
               clip-path: polygon(
                 -100% -100%,
                 200% -100%,
@@ -459,7 +469,7 @@ const makeColorsString = (project) => {
                 -100% 200%
               );
               .tmp-asset {
-                transform: translate(0, calc(-100% - 1rem)) !important;
+                transform: translate(0) !important;
               }
             }
           }
