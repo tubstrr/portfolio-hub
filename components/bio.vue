@@ -20,13 +20,15 @@ import { bioHTML } from "@/assets/cms";
 </template>
 
 <style lang="scss">
+@use "@/assets/styles/variables/breakpoints" as *;
+
 #block-bio {
   margin-top: calc(var(--vh, 1vh) * 100);
   position: relative;
   .container {
     position: relative;
     display: grid;
-    grid-template-columns: 80ch auto;
+    grid-template-columns: min(80ch, calc(var(--vw) * 80)) auto;
     gap: 1rem;
     z-index: 1;
     padding-bottom: 6rem;
@@ -79,6 +81,23 @@ import { bioHTML } from "@/assets/cms";
         width: 100%;
         height: 100%;
         object-fit: contain;
+      }
+    }
+  }
+
+  @media(max-width: $mobile) {
+    .container {
+              grid-template-columns: 1fr;
+        padding-bottom: 0;
+    }
+
+    .media-wrapper {
+      .media {
+        position: absolute;
+        width: 90%;
+        top: 0;
+        right: 0;
+        left: unset;
       }
     }
   }

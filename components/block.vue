@@ -7,3 +7,10 @@ const { name } = defineProps(["name"]);
     <slot />
   </section>
 </template>
+
+<style>
+.block {
+  max-width: calc(100 * var(--vw));
+  overflow: clip;
+}
+</style>

@@ -66,12 +66,22 @@ const forceAssetPreload = () => {
   });
 }
 
+const setViewPort = () => {
+  console.log("Setting viewport")
+  const root  = document.documentElement;
+  root.style.setProperty("--vh", `${window.innerHeight / 100}px`);
+  root.style.setProperty("--vw", `${window.innerWidth / 100}px`);
+};
+
 
 // Lifecycle
 setupTheme();
 
 onMounted(() => {
+  console.log("App mounted")
   window.addEventListener("scroll", forceAssetPreload);
+  window.addEventListener("resize", setViewPort);
+  setViewPort();
 });
 </script>
 
