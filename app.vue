@@ -10,15 +10,21 @@ import { categories } from "@/assets/cms";
 const hasStarted = ref(false);
 
 // Methods
-const forceLoadImage = (url) => {
+const forceLoadImage = async (url) => {
   const img = new Image();
   img.src = url;
+  return img.complete ? Promise.resolve() : new Promise((resolve) => {
+    img.onload = resolve;
+  });
 };
 
-const forceLoadVideo = (url) => {
+const forceLoadVideo = async (url) => {
   const video = document.createElement("video");
   video.src = url;
-  video.load();
+  return new Promise((resolve) => {
+    video.oncanplaythrough = resolve;
+    video.load();
+  });
 };
 
 const forceAssetPreload = () => {
@@ -34,22 +40,26 @@ const forceAssetPreload = () => {
     for (const project of category.projects) {
       if (project.video_url) {
         video_assets.push(`/projects/${project.video_url}`);
-        posters_assets.push(`/projects/${project.video_url.replace(".mp4", ".webp")}`);
+        // posters_assets.push(`/projects/${project.video_url.replace(".mp4", ".webp")}`);
       }
     }
   }
 
-  for (const url of posters_assets) {
-    forceLoadImage(url);
+  async function loadAssets() {
+    // for (const url of posters_assets) {
+    //   await forceLoadImage(url);
+    // }
+
+    for (const url of video_assets) {
+      await forceLoadVideo(url);
+    }
   }
 
-  for (const url of video_assets) {
-    forceLoadVideo(url);
-  }
-  
-  console.log("Forcing asset preload");
-  $bus.emit("force-asset-preload-finished");
-  document.documentElement.classList.add("force-asset-preload");
+  loadAssets().then(() => {
+    console.log("Forcing asset preload");
+    $bus.emit("force-asset-preload-finished");
+    document.documentElement.classList.add("force-asset-preload");
+  });
 }
 
 

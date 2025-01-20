@@ -31,7 +31,7 @@ const mp4ToWebP = (url) => {
     <video v-if="allowVideo" muted autoplay loop :poster="`/projects/${mp4ToWebP(video_url)}`" >
       <source :src="`/projects/${video_url}`" type="video/mp4" />
     </video>
-    <TImage v-else :src="`/${mp4ToWebP(video_url)}`" />
+    <TImage v-else :src="`/projects/${mp4ToWebP(video_url)}`" />
   </div>
 </template>
 
