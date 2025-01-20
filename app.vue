@@ -15,6 +15,8 @@ const forceLoadImage = async (url) => {
   img.src = url;
   return img.complete ? Promise.resolve() : new Promise((resolve) => {
     img.onload = resolve;
+    img.onerror = resolve;
+    img.onabort = resolve;
   });
 };
 
@@ -24,7 +26,9 @@ const forceLoadVideo = async (url) => {
   return new Promise((resolve) => {
     video.oncanplaythrough = resolve;
     video.load();
-  });
+    video.onabort = resolve;
+    video.onerror = resolve;
+  })
 };
 
 const forceAssetPreload = () => {
@@ -40,15 +44,15 @@ const forceAssetPreload = () => {
     for (const project of category.projects) {
       if (project.video_url) {
         video_assets.push(`/projects/${project.video_url}`);
-        // posters_assets.push(`/projects/${project.video_url.replace(".mp4", ".webp")}`);
+        posters_assets.push(`/projects/${project.video_url.replace(".mp4", ".webp")}`);
       }
     }
   }
 
   async function loadAssets() {
-    // for (const url of posters_assets) {
-    //   await forceLoadImage(url);
-    // }
+    for (const url of posters_assets) {
+      await forceLoadImage(url);
+    }
 
     for (const url of video_assets) {
       await forceLoadVideo(url);
