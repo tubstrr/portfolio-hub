@@ -81,15 +81,16 @@ const makeColorsString = (project) => {
             class="project"
             v-for="project in category.projects"
             :key="project.id"
+            @mouseenter="entered(project)"
+            @click="entered(project)"
           >
             <div
-              @mouseenter="entered(project)"
               class="project"
               :class='activeProject === project.id ? "active" : "in-active"'
               :style="makeColorsString(project)"
             >
               <Transition name="project-card">
-                <div v-if="activeProject === project.id" class="tmp-asset">
+                <div v-show="activeProject === project.id" class="tmp-asset">
                   <ProjectsAssetCard
                     v-if="project.video_url"
                     :video_url="project.video_url"
@@ -384,15 +385,48 @@ const makeColorsString = (project) => {
     .panels {
       .panel {
         .projects {
-          a {
-            h3 {
-              font-size: 1.25rem;
-              font-weight: 900;
-              max-width: 100%;
+          .project {
+            aspect-ratio: 16/9;
+            margin-top: 5rem;
+            display: flex;
+            align-content: flex-end;
+            width: 100%;
+            a {
+              h3 {
+                font-weight: 500;
+                letter-spacing: -0.05em;
+                margin-left: 0;
+                padding-left: 0;
+                color: var(--project-color);
+                &::before {
+                  opacity: 0;
+                  left: 0;
+                  rotate: 0deg;
+                }
+                font-size: 1.25rem;
+                font-weight: 900;
+                max-width: 100%;
+              }
+            }
+
+            .tmp-asset {
+              --width: calc(var(--vw) * 65);
+              left: 0;
+              top: 0;
+              transform: translate(0, calc(-100% - 1rem));
+              opacity: 1;
+            }
+
+            &.in-active {
+              .tmp-asset {
+                display: block !important;
+              }
+            }
+
+            + .project {
+              margin-top: 5rem;
             }
           }
-          // &.active {
-          // }
         }
       }
     }
