@@ -29,7 +29,7 @@
 </template>
 
 <style lang="scss">
-// @use "@/assets/styles/variables/breakpoints" as *;
+@use "@/assets/styles/variables/breakpoints" as *;
 
 .block.footer {
   background: var(--header-background);
@@ -43,6 +43,18 @@
 
       .col-4 {
         align-self: flex-end;
+      }
+    }
+  }
+
+  @media (max-width: $tablet) {
+    .container {
+      .flexer {
+        flex-direction: column;
+
+        .col {
+          margin-bottom: 1rem;
+        }
       }
     }
   }

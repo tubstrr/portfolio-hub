@@ -52,8 +52,22 @@ onMounted(() => {
   camera.position.z = 5;
 });
 
+onMounted(() => {
+  // window.addEventListener("resize", () => {
+  //   console.log("🍤 ~ window.addEventListener ~ resize");
+  //   setTimeout(() => {
+  //     renderer.value.setSize(window.innerWidth, window.innerHeight);
+  //   }, 100);
+  //   renderer.value.setSize(window.innerWidth, window.innerHeight);
+  // });
+});
+
 onBeforeUnmount(() => {
   $bus.off("theme:change");
+
+  // window.removeEventListener("resize", () => {
+  //   renderer.value.setSize(window.innerWidth, window.innerHeight);
+  // });
 });
 </script>
 

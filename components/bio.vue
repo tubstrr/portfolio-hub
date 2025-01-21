@@ -11,9 +11,11 @@ import { bioHTML } from "@/assets/cms";
       </div>
     </div>
     <div class="container">
-      <div class="content">
-        <h2>A bit about me 😊</h2>
-        <THtml :html="bioHTML" />
+      <div class="inner-container">
+        <div class="content">
+          <h2>A bit about me 😊</h2>
+          <THtml :html="bioHTML" />
+        </div>
       </div>
     </div>
   </Block>
@@ -26,37 +28,39 @@ import { bioHTML } from "@/assets/cms";
   margin-top: calc(var(--vh, 1vh) * 100);
   position: relative;
   .container {
-    position: relative;
-    display: grid;
-    grid-template-columns: min(80ch, calc(var(--vw) * 80)) auto;
-    gap: 1rem;
-    z-index: 1;
-    padding-bottom: 6rem;
-
-    .content {
+    .inner-container {
       position: relative;
-      max-width: 65ch;
-      margin-left: auto;
-      margin-top: calc(var(--vh, 1vh) * 25);
+      display: grid;
+      grid-template-columns: min(80ch, calc(var(--vw) * 80)) auto;
+      gap: 1rem;
+      z-index: 1;
+      padding-bottom: 6rem;
 
-      * + * {
-        margin-top: 1rem;
-      }
-
-      .theme-html {
+      .content {
         position: relative;
+        max-width: 65ch;
+        // margin-left: auto;
+        margin-top: calc(var(--vh, 1vh) * 25);
 
-        &::before {
-          content: "";
-          position: absolute;
-          top: -10%;
-          left: 0;
-          width: 110%;
-          height: 120%;
-          z-index: -1;
-          background: var(--background);
-          filter: blur(4rem);
-          opacity: 0.9;
+        * + * {
+          margin-top: 1rem;
+        }
+
+        .theme-html {
+          position: relative;
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: -10%;
+            left: 0;
+            width: 110%;
+            height: 120%;
+            z-index: -1;
+            background: var(--background);
+            filter: blur(4rem);
+            opacity: 0.9;
+          }
         }
       }
     }

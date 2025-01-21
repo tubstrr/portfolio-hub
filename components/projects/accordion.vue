@@ -87,47 +87,53 @@ const message = (name) => {
         </button>
       </li>
     </ul>
-    <TransitionGroup tag="ul" class="panels" name="panels">
-      <li
-        v-for="category in categories"
-        :key="category.id"
-        v-show="activeCategory === category.id"
-        ref="panels"
-        class="panel"
-      >
-        <ul class="projects">
-          <li
-            class="project"
-            v-for="project in category.projects"
-            :key="project.id"
-            @mouseenter="entered(project)"
-            @click="entered(project)"
-          >
-            <div
+    <TransitionGroup
+      tag="ul"
+      class="panels"
+      name="panels"
+    >
+      <template v-for="category in categories">
+        <li
+          v-if="activeCategory && activeCategory === category.id"
+          :key="category.id"
+          ref="panels"
+          class="panel"
+          :id="category.id"
+        >
+          <ul class="projects">
+            <li
               class="project"
-              :class='activeProject === project.id ? "active" : "in-active"'
-              :style="makeColorsString(project)"
+              v-for="project in category.projects"
+              :key="project.id"
+              @mouseenter="entered(project)"
+              @click="entered(project)"
             >
-              <Transition name="project-card">
-                <div v-show="activeProject === project.id" class="tmp-asset">
-                  <ProjectsAssetCard
-                    v-if="project.video_url"
-                    :video_url="project.video_url"
+              <div
+                class="project"
+                :class='activeProject === project.id ? "active" : "in-active"'
+                :style="makeColorsString(project)"
+              >
+                <Transition name="project-card">
+                  <div v-show="activeProject === project.id" class="tmp-asset">
+                    <ProjectsAssetCard
+                      v-if="project.video_url"
+                      :video_url="project.video_url"
+                    />
+                  </div>
+                </Transition>
+                <TLink :href="project.url" target="_blank">
+                  <h3
+                    v-html="
+                      project.name +
+                      `<span class='learn-more'>👉 ${message(project.name)}</span>`
+                    "
                   />
-                </div>
-              </Transition>
-              <TLink :href="project.url" target="_blank">
-                <h3
-                  v-html="
-                    project.name +
-                    `<span class='learn-more'>👉 ${message(project.name)}</span>`
-                  "
-                />
-              </TLink>
-            </div>
-          </li>
-        </ul>
-      </li>
+                </TLink>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </template>
     </TransitionGroup>
   </div>
 </template>
@@ -210,25 +216,25 @@ const message = (name) => {
       transition: 850ms ease;
       pointer-events: none;
       user-select: none;
-      position: absolute;
       width: 100%;
+      transition-delay: 500ms;
+    }
+
+    .panels-leave-active {
+      position: absolute;
+      transition-delay: 0ms;
     }
 
     .panels-enter-from,
     .panels-leave-to {
       opacity: 0;
       transform: translateX(10%);
-      top: 0;
-      left: 0;
     }
     .panels-enter-from {
-      transform: translateX(10%);
+      transform: translateX(-10%);
     }
 
     .panel {
-      // max-height: var(--max-height);
-      // overflow: auto;
-
       .projects {
         .project {
           position: relative;

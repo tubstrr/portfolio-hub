@@ -54,56 +54,64 @@ const menuClass = computed(() => {
 <template>
   <nav id="navigation">
     <div class="container">
-      <h1 class="h6">
-        <button title="Scroll to top of site" @click="scrollTo(0)">
-          Jonathan Knoll
-        </button>
-      </h1>
-      <div class="toggles">
-        <button @click="toggleTheme" class="theme">
-          <TSvg type="sun" class="sun" />
-          <TSvg type="moon" class="moon" />
-        </button>
-        <button @click="toggleMenu" class="sub-menu-toggle" :class="menuClass">
-          <span class="pills">
-            <span class="pill one" />
-            <span class="pill two" />
-          </span>
-          <!-- Menu -->
-        </button>
+      <div class="inner-container">
+        <h1 class="h6">
+          <button title="Scroll to top of site" @click="scrollTo(0)">
+            Jonathan Knoll
+          </button>
+        </h1>
+        <div class="toggles">
+          <button @click="toggleTheme" class="theme">
+            <TSvg type="sun" class="sun" />
+            <TSvg type="moon" class="moon" />
+          </button>
+          <button
+            @click="toggleMenu"
+            class="sub-menu-toggle"
+            :class="menuClass"
+          >
+            <span class="pills">
+              <span class="pill one" />
+              <span class="pill two" />
+            </span>
+            <!-- Menu -->
+          </button>
+        </div>
       </div>
     </div>
     <div class="sub-menu" :class="{ open: menuOpened }">
       <div class="container">
-        <ul class="sub-nav">
-          <li>
-            <button
-              title="Scroll to the hero"
-              @click='scrollTo("block-hero", "nav")'
-              style="--symbol: '👋'"
-            >
-              Intro
-            </button>
-          </li>
-          <li>
-            <button
-              title="Scroll to the projects"
-              @click='scrollTo("block-projects", "nav")'
-              style="--symbol: '👈'"
-            >
-              Portfolio
-            </button>
-          </li>
-          <li>
-            <button
-              title="Scroll to the bio"
-              @click='scrollTo("block-bio", "nav")'
-              style="--symbol: '😊'"
-            >
-              Bio
-            </button>
-          </li>
-        </ul>
+        <div class="inner-container">
+          <ul class="sub-nav">
+            <li>
+              <button
+                title="Scroll to the hero"
+                @click='scrollTo("block-hero", "nav")'
+                style="--symbol: '👋'"
+              >
+                Intro
+              </button>
+            </li>
+            <li>
+              <button
+                title="Scroll to the projects"
+                @click='scrollTo("block-projects", "nav")'
+                style="--symbol: '👈'"
+              >
+                Portfolio
+              </button>
+            </li>
+            <li>
+              <button
+                title="Scroll to the bio"
+                @click='scrollTo("block-bio", "nav")'
+                style="--symbol: '😊'"
+              >
+                Bio
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </nav>
@@ -127,101 +135,103 @@ const menuClass = computed(() => {
   transition: 300ms ease;
 
   .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .toggles {
+    .inner-container {
       display: flex;
-      gap: 1.5rem;
-      --transition: 250ms ease-in-out;
-      button {
-        width: 1rem;
-        aspect-ratio: 1;
-        position: relative;
-        transition: var(--transition);
-
-        svg {
-          color: var(--text);
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          top: 0;
-          left: 0;
+      justify-content: space-between;
+      align-items: center;
+      .toggles {
+        display: flex;
+        gap: 1.5rem;
+        --transition: 250ms ease-in-out;
+        button {
+          width: 1rem;
+          aspect-ratio: 1;
+          position: relative;
           transition: var(--transition);
 
-          &.sun {
-            opacity: 1;
-          }
-
-          &.moon {
-            opacity: 0;
-          }
-        }
-
-        &:hover {
-          opacity: 0.75;
-          scale: 1.15;
-        }
-      }
-
-      .sub-menu-toggle {
-        width: auto;
-        aspect-ratio: auto;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        text-transform: uppercase;
-        font-weight: 500;
-        font-size: 0.8rem;
-
-        .pills {
-          width: 0.8rem;
-          aspect-ratio: 1;
-          display: inline-block;
-          position: relative;
-          --height: 1px;
-          .pill {
-            width: 100%;
+          svg {
+            color: var(--text);
             position: absolute;
-            height: var(--height);
-            border-radius: calc(var(--height) / 2);
-            background: var(--text);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            top: calc(50% + -0.2rem - var(--height) / 2);
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
             transition: var(--transition);
 
-            &.two {
-              top: calc(50% + 0.2rem - var(--height) / 2);
+            &.sun {
+              opacity: 1;
+            }
+
+            &.moon {
+              opacity: 0;
             }
           }
-        }
-        &.closed {
+
           &:hover {
+            opacity: 0.75;
+            scale: 1.15;
+          }
+        }
+
+        .sub-menu-toggle {
+          width: auto;
+          aspect-ratio: auto;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.35rem;
+          text-transform: uppercase;
+          font-weight: 500;
+          font-size: 0.8rem;
+
+          .pills {
+            width: 0.8rem;
+            aspect-ratio: 1;
+            display: inline-block;
+            position: relative;
+            --height: 1px;
             .pill {
-              transform: translate(-50%) rotate(-90deg);
-              top: calc(50% - var(--height) / 2);
+              width: 100%;
+              position: absolute;
+              height: var(--height);
+              border-radius: calc(var(--height) / 2);
+              background: var(--text);
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              top: calc(50% + -0.2rem - var(--height) / 2);
+              transition: var(--transition);
+
               &.two {
-                transform: translate(-50%) rotate(0deg);
+                top: calc(50% + 0.2rem - var(--height) / 2);
               }
             }
           }
-        }
-        &.open {
-          .pill {
-            top: calc(50% - var(--height) / 2);
-            transform: translate(-50%) rotate(-135deg);
-            &.two {
-              top: calc(50% - var(--height) / 2);
-              transform: translate(-50%) rotate(-45deg);
+          &.closed {
+            &:hover {
+              .pill {
+                transform: translate(-50%) rotate(-90deg);
+                top: calc(50% - var(--height) / 2);
+                &.two {
+                  transform: translate(-50%) rotate(0deg);
+                }
+              }
             }
           }
-        }
+          &.open {
+            .pill {
+              top: calc(50% - var(--height) / 2);
+              transform: translate(-50%) rotate(-135deg);
+              &.two {
+                top: calc(50% - var(--height) / 2);
+                transform: translate(-50%) rotate(-45deg);
+              }
+            }
+          }
 
-        &:hover {
-          opacity: 0.8;
-          scale: 1;
+          &:hover {
+            opacity: 0.8;
+            scale: 1;
+          }
         }
       }
     }
@@ -264,6 +274,7 @@ const menuClass = computed(() => {
             font-weight: 400;
             position: relative;
             padding-right: 1.5em;
+            margin-right: -1.5em;
 
             &::after {
               content: var(--symbol);
