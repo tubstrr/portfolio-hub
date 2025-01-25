@@ -3,11 +3,16 @@
 import { categories } from "@/assets/cms";
 
 // Variables
-const activeProject = ref(categories[0].projects[0].id);
-const activeCategory = ref(categories[0].id);
+const activeProject = ref("cac");
+const activeCategory = ref("websites");
 const panels = ref(null);
 const debounceTimer = ref(null);
 const tabsRef = ref(null);
+
+// Computed
+const activeCategoryIndex = computed(() => {
+  return categories.filter((category) => category.id === activeCategory.value);
+});
 
 // Methods
 const setActiveCategory = (id) => {
@@ -92,48 +97,46 @@ const message = (name) => {
       class="panels"
       name="panels"
     >
-      <template v-for="category in categories">
-        <li
-          v-if="activeCategory && activeCategory === category.id"
-          :key="category.id"
-          ref="panels"
-          class="panel"
-          :id="category.id"
-        >
-          <ul class="projects">
-            <li
+      <li
+        v-for="category in activeCategoryIndex"
+        :key="category.id"
+        :id="category.id"
+        ref="panels"
+        class="panel"
+      >
+        <ul class="projects">
+          <li
+            class="project"
+            v-for="project in category.projects"
+            :key="project.id"
+            @mouseenter="entered(project)"
+            @click="entered(project)"
+          >
+            <div
               class="project"
-              v-for="project in category.projects"
-              :key="project.id"
-              @mouseenter="entered(project)"
-              @click="entered(project)"
+              :class='activeProject === project.id ? "active" : "in-active"'
+              :style="makeColorsString(project)"
             >
-              <div
-                class="project"
-                :class='activeProject === project.id ? "active" : "in-active"'
-                :style="makeColorsString(project)"
-              >
-                <Transition name="project-card">
-                  <div v-show="activeProject === project.id" class="tmp-asset">
-                    <ProjectsAssetCard
-                      v-if="project.video_url"
-                      :video_url="project.video_url"
-                    />
-                  </div>
-                </Transition>
-                <TLink :href="project.url" target="_blank">
-                  <h3
-                    v-html="
-                      project.name +
-                      `<span class='learn-more'>👉 ${message(project.name)}</span>`
-                    "
+              <Transition name="project-card">
+                <div v-show="activeProject === project.id" class="tmp-asset">
+                  <ProjectsAssetCard
+                    v-if="project.video_url"
+                    :video_url="project.video_url"
                   />
-                </TLink>
-              </div>
-            </li>
-          </ul>
-        </li>
-      </template>
+                </div>
+              </Transition>
+              <TLink :href="project.url" target="_blank">
+                <h3
+                  v-html="
+                    project.name +
+                    `<span class='learn-more'>👉 ${message(project.name)}</span>`
+                  "
+                />
+              </TLink>
+            </div>
+          </li>
+        </ul>
+      </li>
     </TransitionGroup>
   </div>
 </template>

@@ -38,6 +38,7 @@ export const useTheme = () => {
 };
 
 export const setupTheme = () => {
+  const { $bus } = useNuxtApp();
   const userTheme = useCookie("user_theme", false);
   if (typeof userTheme.value === "undefined") userTheme.value = false;
 
@@ -48,14 +49,22 @@ export const setupTheme = () => {
   if (import.meta.client) {
     if (!userTheme.value) {
       const prefersString = "(prefers-color-scheme: dark)";
+      console.log("🍤 ~ setupTheme ~ prefersString:", prefersString);
       const match = window.matchMedia;
       const prefersDarkMode = match && match(prefersString).matches;
 
-      themeCookie.value = prefersDarkMode ? "dark" : "light";
+      if (prefersDarkMode) {
+        themeCookie.value = "dark";
+      } else {
+        themeCookie.value = "light";
+      }
     }
 
     document.documentElement.classList.remove("light-mode", "dark-mode");
     document.documentElement.classList.add(whichTheme(themeCookie.value));
+    nextTick(() => {
+      $bus.emit("theme:change", themeCookie.value);
+    });
   }
 
   return useTheme();

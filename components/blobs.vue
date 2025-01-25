@@ -2,64 +2,59 @@
 // Libraries
 import * as THREE from "three";
 import { useTheme } from "@/composables/useTheme";
-const { $bus } = useNuxtApp();
+
+// Composables / Data
+import { initScene } from "@/composables/three";
+import { config } from "@/assets/three.config";
 
 // Variables
+const { $bus } = useNuxtApp();
 const theme = useTheme();
 const renderer = ref(null);
-const colors = {
-  "dark-mode": "#242424",
-  "light-mode": "#f8f8f8",
-};
+const colors = ref(config.colors[theme.value]);
+const state = ref({ config, theme, colors });
 
 // Lifecycle
 $bus.on("theme:change", (payload) => {
-  console.log("🍤 ~ $bus.on ~ payload:", payload);
-  const bg = new THREE.Color(colors[payload + "-mode"]);
-  renderer.value.setClearColor(bg, 1);
+  const mode = payload + "-mode";
+  colors.value = config.colors[mode];
+
+  const bg = new THREE.Color(colors.value.background);
+  if (renderer.value) renderer.value.setClearColor(bg, 1);
 });
 
 onMounted(() => {
-  const scene = new THREE.Scene();
+  initScene(state);
 
-  const camera = new THREE.PerspectiveCamera(
-    75,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000,
-  );
+  // const scene = new THREE.Scene();
 
-  function animate() {
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
+  // const camera = new THREE.PerspectiveCamera(
+  //   75,
+  //   window.innerWidth / window.innerHeight,
+  //   0.1,
+  //   1000,
+  // );
 
-    renderer.value.render(scene, camera);
-  }
+  // function animate() {
+  //   cube.rotation.x += 0.01;
+  //   cube.rotation.y += 0.01;
 
-  renderer.value = new THREE.WebGLRenderer({ canvas: three });
-  renderer.value.setSize(window.innerWidth, window.innerHeight);
-  renderer.value.setAnimationLoop(animate);
-  const bg = new THREE.Color(colors[theme.value]);
-  console.log("🍤 ~ onMounted ~ theme.value:", theme.value);
-  console.log("🍤 ~ onMounted ~ colors[theme.value]:", colors[theme.value]);
-  renderer.value.setClearColor(bg, 1);
+  //   renderer.value.render(scene, camera);
+  // }
 
-  const geometry = new THREE.BoxGeometry(1, 1, 1);
-  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-  const cube = new THREE.Mesh(geometry, material);
-  scene.add(cube);
+  // renderer.value = new THREE.WebGLRenderer({ canvas: background_canvas });
+  // renderer.value.setSize(window.innerWidth, window.innerHeight);
+  // renderer.value.setAnimationLoop(animate);
+  // const bg = new THREE.Color(colors.value.background);
+  // renderer.value.setClearColor(bg, 1);
 
-  camera.position.z = 5;
-});
+  // const geometry = new THREE.BoxGeometry(1, 1, 1);
+  // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+  // const cube = new THREE.Mesh(geometry, material);
+  // scene.add(cube);
 
-onMounted(() => {
-  // window.addEventListener("resize", () => {
-  //   console.log("🍤 ~ window.addEventListener ~ resize");
-  //   setTimeout(() => {
-  //     renderer.value.setSize(window.innerWidth, window.innerHeight);
-  //   }, 100);
-  //   renderer.value.setSize(window.innerWidth, window.innerHeight);
-  // });
+  // camera.position.z = 5;
+  // console.log("🍤 ~ onMounted ~ state:", state.value);
 });
 
 onBeforeUnmount(() => {
@@ -72,11 +67,11 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <canvas id="three" ref="canvas" />
+  <canvas id="background_canvas" ref="canvas" />
 </template>
 
 <style>
-#three {
+#background_canvas {
   position: fixed;
   top: 0;
   left: 0;

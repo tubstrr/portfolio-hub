@@ -5,7 +5,6 @@ const inbound = {
   video_url: "inbound.mp4",
   color: "#213343",
   // dark_color: "#fef5eb",
-  dark_color: "#ffbc4b",
   dark_color: "#66d9c8",
 };
 
@@ -15,7 +14,7 @@ const cac = {
   url: "https://www.architecture.org",
   video_url: "cac.mp4",
   color: "#CC0000",
-  dark_color: "#c66",
+  // dark_color: "#c66",
   dark_color: "#9d9fa2",
 };
 
