@@ -2,7 +2,7 @@ export const config = {
   blobs: [{
     id: "pink_blob",
     init: {
-      position: { x: 0, y: 0, z: 0 },
+      position: { x: 40, y: 0, z: 0 },
       morph: { x: 0, y: 0, z: 0 },
     },
     attributes: {
@@ -14,6 +14,44 @@ export const config = {
       color: "pink",
     },
   }],
+  scene: {
+    background_alpha: 1,
+    camera: {
+      fov: 75,
+      near: 0.1,
+      far: 10000,
+      position: { x: 0, y: 0, z: 100 },
+    },
+    lights: [
+      {
+        type: "ambient",
+        color: 0xffffff,
+        // color: 0x000000,
+        intensity: 1,
+      },
+      {
+        type: "hemisphere",
+        skyColor: 0x000000,
+        groundColor: 0xffffff,
+        intensity: 1,
+        position: { x: 0, y: 0, z: 0 },
+      },
+      {
+        type: "directional",
+        color: 0xffffff,
+        intensity: .5,
+        target: { x: 0, y: 0, z: 0 },
+        position: { x: -500, y: 10, z: 200 },
+      },
+      {
+        type: "directional",
+        color: 0x000000,
+        intensity: 1,
+        target: { x: 0, y: 0, z: 0 },
+        position: { x: 500, y: -10, z: 200 },
+      },
+    ],
+  },
   colors: {
     "dark-mode": {
       background: "#242424",

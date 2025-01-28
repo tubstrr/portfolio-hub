@@ -4,6 +4,7 @@
       <div class="inner-container">
         <div class="content">
           <h2 class="h1">Howdy <span class="wave">👋</span></h2>
+          <h1>I noticed you prefer Dark mode!!!!</h1>
           <p>
             My name is Jonathan Knoll, I’ve been working as a software engineer
             for the better part of a decade now; I’ve gone from hacking

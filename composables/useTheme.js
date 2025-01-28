@@ -49,7 +49,6 @@ export const setupTheme = () => {
   if (import.meta.client) {
     if (!userTheme.value) {
       const prefersString = "(prefers-color-scheme: dark)";
-      console.log("🍤 ~ setupTheme ~ prefersString:", prefersString);
       const match = window.matchMedia;
       const prefersDarkMode = match && match(prefersString).matches;
 
