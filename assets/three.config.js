@@ -2,16 +2,29 @@ export const config = {
   blobs: [{
     id: "pink_blob",
     init: {
-      position: { x: 40, y: 0, z: 0 },
+      position: { x: 40, y: 0, z: 50 },
       morph: { x: 0, y: 0, z: 0 },
     },
     attributes: {
       radius: 10,
       segments: {
-        width: 64,
-        height: 64,
+        width: 128,
+        height: 128,
       },
       color: "pink",
+    },
+    animation: {
+      loop: {
+        rotation: { x: .5, y: 0, z: 0 },
+      },
+      perlin: {
+        factor: 0.1,
+        strength: {
+          x: [1, 3],
+          y: [1, 5],
+          z: [1, 2],
+        },
+      },
     },
   }],
   scene: {

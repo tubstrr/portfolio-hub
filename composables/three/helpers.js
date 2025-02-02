@@ -57,3 +57,16 @@ export const getColor = (config, theme, color) => {
 
   return currentColors[color];
 };
+
+export const makeRotations = (loopRotation, sphereRotation) => {
+  const dampener = 100;
+  return {
+    x: (loopRotation.x / dampener) + sphereRotation.x,
+    y: (loopRotation.y / dampener) + sphereRotation.y,
+    z: (loopRotation.z / dampener) + sphereRotation.z,
+  };
+};
+
+export const randomize = (min, max) => {
+  return Math.random() * (max - min) + min;
+};
