@@ -38,18 +38,15 @@
         }
       }
 
-      &.v-aos div {
-        transition-delay: 750ms;
-        transition: 2500ms ease-in-out;
-      }
-      &.v-aos-before-enter div {
+      div {
+        transition: 1500ms ease-in-out 500ms;
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateX(-2%);
         clip-path: polygon(0 100%, 0 50%, 100% 50%, 0 50%, 0 0);
       }
       &.v-aos-entered div {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
         clip-path: polygon(0 100%, 100% 100%, 100% 50%, 100% 0, 0 0);
       }
     }
