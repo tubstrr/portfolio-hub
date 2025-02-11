@@ -1,32 +1,64 @@
 export const config = {
-  blobs: [{
-    id: "pink_blob",
-    init: {
-      position: { x: 40, y: 0, z: 50 },
-      morph: { x: 0, y: 0, z: 0 },
-    },
-    attributes: {
-      radius: 10,
-      segments: {
-        width: 128,
-        height: 128,
+  blobs: [
+    {
+      id: "pink_blob",
+      init: {
+        position: { x: 4, y: -3, z: 95 },
+        morph: { x: 2, y: 6, z: 2 },
       },
-      color: "pink",
-    },
-    animation: {
-      loop: {
-        rotation: { x: .5, y: 0, z: 0 },
+      attributes: {
+        radius: 100,
+        detail: .5,
+        deformation: .2,
+        color: "pink",
       },
-      perlin: {
-        factor: 0.1,
-        strength: {
-          x: [1, 3],
-          y: [1, 5],
-          z: [1, 2],
+      animation: {
+        reduction: 150000,
+        loop: {
+          rotation: { x: .025, y: 0.0, z: 0.0 },
         },
       },
     },
-  }],
+    {
+      id: "green_blob",
+      init: {
+        position: { x: -30, y: -30, z: 70 },
+        morph: { x: 25, y: 15, z: 15 },
+      },
+      attributes: {
+        radius: 150,
+        detail: 1,
+        deformation: .5,
+        color: "green",
+      },
+      animation: {
+        reduction: 150000,
+        loop: {
+          // rotation: { x: 0.025, y: 0.025, z: -0.025 },
+          rotation: { x: 0.00, y: 0.00, z: 0.00 },
+        },
+      },
+    },
+    // {
+    //   id: "blue_blob",
+    //   init: {
+    //     position: { x: 75, y: -20, z: 20 },
+    //     morph: { x: 25, y: 50, z: 25 },
+    //   },
+    //   attributes: {
+    //     radius: 100,
+    //     detail: 1,
+    //     deformation: 1.5,
+    //     color: "blue",
+    //   },
+    //   animation: {
+    //     reduction: 1000000,
+    //     loop: {
+    //       rotation: { x: 0.05, y: 0.0, z: 0.025 },
+    //     },
+    //   },
+    // },
+  ],
   scene: {
     background_alpha: 1,
     camera: {
@@ -35,35 +67,6 @@ export const config = {
       far: 10000,
       position: { x: 0, y: 0, z: 100 },
     },
-    lights: [
-      {
-        type: "ambient",
-        color: 0xffffff,
-        // color: 0x000000,
-        intensity: 1,
-      },
-      {
-        type: "hemisphere",
-        skyColor: 0x000000,
-        groundColor: 0xffffff,
-        intensity: 1,
-        position: { x: 0, y: 0, z: 0 },
-      },
-      {
-        type: "directional",
-        color: 0xffffff,
-        intensity: .5,
-        target: { x: 0, y: 0, z: 0 },
-        position: { x: -500, y: 10, z: 200 },
-      },
-      {
-        type: "directional",
-        color: 0x000000,
-        intensity: 1,
-        target: { x: 0, y: 0, z: 0 },
-        position: { x: 500, y: -10, z: 200 },
-      },
-    ],
   },
   colors: {
     "dark-mode": {
