@@ -21,7 +21,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <canvas id="background_canvas" ref="canvas" />
+  <canvas id="background_canvas" ref="canvas" v-aos />
 </template>
 
 <style>
@@ -33,5 +33,11 @@ onBeforeUnmount(() => {
   background-color: var(--background);
   min-width: calc(100 * var(--vw));
   min-height: calc(100 * var(--vh));
+
+  opacity: 0;
+}
+#background_canvas.v-aos-entered {
+  opacity: 1;
+  transition: opacity 1s;
 }
 </style>

@@ -39,7 +39,7 @@
       }
 
       div {
-        transition: 1500ms ease-in-out 500ms;
+        transition: 1500ms ease-in-out 150ms;
         opacity: 0;
         transform: translateX(-2%);
         clip-path: polygon(0 100%, 0 50%, 100% 50%, 0 50%, 0 0);
