@@ -1,6 +1,5 @@
 // Libraries
 import * as THREE from "three";
-import SimplexNoise from "@/assets/scripts/simplex_noise.js";
 
 // Composables
 import {
@@ -93,6 +92,15 @@ export const animationLoop = (time) => {
 
   handleBlobAnimations(time);
 
+  // Get target angles from mouse position
+  const { cameraAngle } = window.three_state;
+  const { x: targetX, y: targetY } = cameraAngle;
+
+  // Smoothly interpolate current rotation to target
+  const lerpFactor = 0.00125; // Adjust this value to change smoothing (0-1)
+  camera.rotation.y += (-targetX * 0.5 - camera.rotation.y) * lerpFactor; // Inverted X
+  camera.rotation.x += (targetY * 0.5 - camera.rotation.x) * lerpFactor; // Removed negative from Y
+
   renderer.render(scene, camera);
 };
 
@@ -128,63 +136,6 @@ export const createRenderer = () => {
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
   return renderer;
-};
-
-export const createLights = () => {
-  const { scene, config } = window.three_state;
-  if (!scene) throw new Error("No scene provided");
-  if (!config) throw new Error("No config provided");
-
-  // const { lights } = config.scene;
-  // if (!lights) throw new Error("No lights provided");
-
-  // for (const light of lights) {
-  //   if (light.type === "ambient") {
-  //     const ambientLight = new THREE.AmbientLight(light.color, light.intensity);
-  //     scene.add(ambientLight);
-  //   } else if (light.type === "point") {
-  //     const pointLight = new THREE.PointLight(
-  //       light.color,
-  //       light.intensity,
-  //       light.distance,
-  //       light.decay,
-  //     );
-  //     pointLight.position.set(
-  //       light.position.x,
-  //       light.position.y,
-  //       light.position.z,
-  //     );
-  //     scene.add(pointLight);
-  //   } else if (light.type === "directional") {
-  //     const directionalLight = new THREE.DirectionalLight(
-  //       light.color,
-  //       light.intensity,
-  //     );
-  //     directionalLight.target.position.set(
-  //       light.target.x,
-  //       light.target.y,
-  //       light.target.z,
-  //     );
-  //     directionalLight.position.set(
-  //       light.position.x,
-  //       light.position.y,
-  //       light.position.z,
-  //     );
-  //     scene.add(directionalLight);
-  //   } else if (light.type === "hemisphere") {
-  //     const hemisphereLight = new THREE.HemisphereLight(
-  //       light.skyColor,
-  //       light.groundColor,
-  //       light.intensity,
-  //     );
-  //     hemisphereLight.position.set(
-  //       light.position.x,
-  //       light.position.y,
-  //       light.position.z,
-  //     );
-  //     scene.add(hemisphereLight);
-  //   }
-  // }
 };
 
 export const createObjects = () => {
@@ -261,9 +212,27 @@ export const initScene = (state) => {
     renderer,
   };
 
-  createLights();
   createObjects();
 
   initLifecycle(config);
+
+  const cameraAngle = {
+    x: 0.0,
+    y: 0.0,
+  };
+  window.three_state.cameraAngle = cameraAngle;
+
+  window.addEventListener("mousemove", (event) => {
+    const { clientX, clientY } = event;
+    const { innerWidth, innerHeight } = window;
+
+    const x = (clientX / innerWidth) * 2 - 1;
+    const y = -(clientY / innerHeight) * 2 + 1;
+
+    cameraAngle.x = x;
+    cameraAngle.y = y;
+    window.three_state.cameraAngle = cameraAngle;
+  });
+
   return window.three_state;
 };

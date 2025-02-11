@@ -7,8 +7,8 @@ varying vec2 vUv;
 varying float vDisplacement;
 
 void main() {
-    float distort = 2.0 * vDisplacement * u_intensity * sin(vUv.y * 10.0 + u_time) * .25;
-    vec3 color = u_color * (1.5 - distort);  // Use uniform color with distortion
+    float distort = 2.0 * vDisplacement * u_intensity * sin(vUv.y * 10.0 + u_time) * .125;
+    vec3 color = u_color * (1.0 - distort);  // Use uniform color with distortion
     gl_FragColor = vec4(color, 1.0);
 }
 `;
