@@ -17,6 +17,29 @@ import {
 
 // Constants
 const INITIAL_TIME = randomize(0, 5000);
+const INITIAL_CAMERA_ROTATION = {
+  time: {
+    start: 500,
+    end: 4000,
+    // end: 1500,
+  },
+  x: {
+    start: 120 * (Math.PI / 180),
+    end: 0,
+  },
+  y: {
+    start: 180 * (Math.PI / 180), // Convert 10 degrees to radians
+    end: 0,
+  },
+  z: {
+    start: 250,
+    end: 100,
+  },
+};
+const CAMERA_LIMITS = {
+  x: 10 * (Math.PI / 180), // Convert 10 degrees to radians
+  y: 10 * (Math.PI / 180), // Convert 10 degrees to radians
+};
 
 // Functions
 export const updateBackground = (renderer, color) => {
@@ -83,6 +106,61 @@ export const handleBlobAnimations = (time) => {
   }
 };
 
+export const handleCameraRotation = (time) => {
+  // Get target angles from mouse position
+  const { cameraAngle, camera } = window.three_state;
+  const { x: targetX, y: targetY } = cameraAngle;
+
+  // Smoothly interpolate current rotation to target
+  const lerpFactor = 0.00125; // Adjust this value to change smoothing (0-1)
+
+  // Calculate new rotation values with limits
+  const newRotationY = (-targetX * 0.5 - camera.rotation.y) * lerpFactor;
+  const newRotationX = (targetY * 0.5 - camera.rotation.x) * lerpFactor;
+
+  const beforeInitialRotation = time < INITIAL_CAMERA_ROTATION.time.start;
+  const afterInitialRotation = time > INITIAL_CAMERA_ROTATION.time.end;
+  const duringInitialRotation = !beforeInitialRotation && !afterInitialRotation;
+
+  if (beforeInitialRotation && !duringInitialRotation) {
+    camera.rotation.x = INITIAL_CAMERA_ROTATION.x.start;
+    camera.rotation.y = INITIAL_CAMERA_ROTATION.y.start;
+    camera.position.z = INITIAL_CAMERA_ROTATION.z.start;
+  }
+
+  if (duringInitialRotation) {
+    // Apply initial rotation
+    camera.rotation.y = THREE.MathUtils.lerp(
+      INITIAL_CAMERA_ROTATION.y.start,
+      INITIAL_CAMERA_ROTATION.y.end,
+      time / INITIAL_CAMERA_ROTATION.time.end,
+    );
+    camera.rotation.x = THREE.MathUtils.lerp(
+      INITIAL_CAMERA_ROTATION.x.start,
+      INITIAL_CAMERA_ROTATION.x.end,
+      time / INITIAL_CAMERA_ROTATION.time.end,
+    );
+    camera.position.z = THREE.MathUtils.lerp(
+      INITIAL_CAMERA_ROTATION.z.start,
+      INITIAL_CAMERA_ROTATION.z.end,
+      time / INITIAL_CAMERA_ROTATION.time.end,
+    );
+  } else if (afterInitialRotation) {
+    // Apply rotation with limits
+    camera.rotation.y = THREE.MathUtils.clamp(
+      camera.rotation.y + newRotationY,
+      -CAMERA_LIMITS.x,
+      CAMERA_LIMITS.x,
+    );
+
+    camera.rotation.x = THREE.MathUtils.clamp(
+      camera.rotation.x + newRotationX,
+      -CAMERA_LIMITS.y,
+      CAMERA_LIMITS.y,
+    );
+  }
+};
+
 export const animationLoop = (time) => {
   if (!window.three_state) return;
   const { renderer, scene, camera } = window.three_state;
@@ -91,15 +169,7 @@ export const animationLoop = (time) => {
   }
 
   handleBlobAnimations(time);
-
-  // Get target angles from mouse position
-  const { cameraAngle } = window.three_state;
-  const { x: targetX, y: targetY } = cameraAngle;
-
-  // Smoothly interpolate current rotation to target
-  const lerpFactor = 0.00125; // Adjust this value to change smoothing (0-1)
-  camera.rotation.y += (-targetX * 0.5 - camera.rotation.y) * lerpFactor; // Inverted X
-  camera.rotation.x += (targetY * 0.5 - camera.rotation.x) * lerpFactor; // Removed negative from Y
+  handleCameraRotation(time);
 
   renderer.render(scene, camera);
 };

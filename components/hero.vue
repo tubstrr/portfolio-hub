@@ -2,15 +2,17 @@
   <Block name="hero">
     <div class="container">
       <div class="inner-container">
-        <div class="content">
-          <h2 class="h1">Howdy <span class="wave">👋</span></h2>
-          <!-- <h1>I noticed you prefer Dark mode!!!!</h1> -->
-          <p>
-            My name is Jonathan Knoll, I’ve been working as a software engineer
-            for the better part of a decade now; I’ve gone from hacking
-            WordPress templates for local businesses to leading a team of
-            developers on projects for fortune 500 companies.
-          </p>
+        <div class="content" v-aos>
+          <div>
+            <h2 class="h1">Hey <span class="wave">👋</span></h2>
+            <!-- <h1>I noticed you prefer Dark mode!!!!</h1> -->
+            <p>
+              My name is Jonathan Knoll, and I'm a software engineer with nearly
+              a decade of experience, starting out by hacking WordPress
+              templates for small businesses all the way to leading teams on
+              Fortune 500 projects.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -34,6 +36,21 @@
         .wave {
           animation: wave ease-in-out 1200ms;
         }
+      }
+
+      &.v-aos div {
+        transition-delay: 750ms;
+        transition: 2500ms ease-in-out;
+      }
+      &.v-aos-before-enter div {
+        opacity: 0;
+        transform: translateY(20px);
+        clip-path: polygon(0 100%, 0 50%, 100% 50%, 0 50%, 0 0);
+      }
+      &.v-aos-entered div {
+        opacity: 1;
+        transform: translateY(0);
+        clip-path: polygon(0 100%, 100% 100%, 100% 50%, 100% 0, 0 0);
       }
     }
   }
