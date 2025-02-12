@@ -32,7 +32,7 @@ const INITIAL_CAMERA_ROTATION = {
     end: 0,
   },
   z: {
-    start: 250,
+    start: 300,
     end: 100,
   },
 };

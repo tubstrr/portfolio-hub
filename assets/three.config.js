@@ -101,6 +101,27 @@ export const config = {
         },
       },
     },
+    // Green Blob 2
+    {
+      id: "green_blob_2",
+      init: {
+        position: { x: -100, y: 40, z: 20 },
+        morph: { x: 20, y: 10, z: 10 },
+      },
+      attributes: {
+        radius: 25,
+        detail: 1,
+        deformation: .2,
+        color: "green",
+      },
+      animation: {
+        reduction: 25000,
+        loop: {
+          // rotation: { x: 0.025, y: 0.025, z: -0.025 },
+          rotation: { x: 0.00, y: 0.00, z: 0.00 },
+        },
+      },
+    },
     // Blue Blob
     {
       id: "blue_blob",
@@ -110,6 +131,26 @@ export const config = {
       },
       attributes: {
         radius: 50,
+        detail: 1,
+        deformation: .5,
+        color: "blue",
+      },
+      animation: {
+        reduction: 100000,
+        loop: {
+          rotation: { x: 0.00, y: 0.0, z: 0.00 },
+        },
+      },
+    },
+    // Blue Blob 2
+    {
+      id: "blue_blob_2",
+      init: {
+        position: { x: -6, y: -2, z: 95 },
+        morph: { x: 0, y: 0, z: 0 },
+      },
+      attributes: {
+        radius: 25,
         detail: 1,
         deformation: .5,
         color: "blue",
