@@ -4,7 +4,7 @@ import { categories } from "@/assets/cms";
 
 // Variables
 const activeProject = ref("cac");
-const activeCategory = ref("websites");
+const activeCategory = ref("professional");
 const panels = ref(null);
 const debounceTimer = ref(null);
 const tabsRef = ref(null);

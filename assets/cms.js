@@ -66,7 +66,7 @@ const streamlit = {
 const fifteen = {
   id: "fifteen",
   name: "15 Puzzle",
-  url: "https://15.joshuapowell.dev",
+  url: "https://15-puzzle.jonknoll.dev",
   video_url: "15.mp4",
   color: "#004643",
 };
@@ -74,7 +74,7 @@ const fifteen = {
 const numberish = {
   id: "numberish",
   name: "Numberish",
-  url: "https://numberish.joshuapowell.dev",
+  url: "https://numberish.jonknoll.dev",
   video_url: "numberish.mp4",
   // color:
 };
@@ -82,7 +82,7 @@ const numberish = {
 const triangle_puzzle = {
   id: "triangle_puzzle",
   name: "Triangle Puzzle",
-  url: "https://triangle-puzzle.joshuapowell.dev",
+  url: "https://triangle-puzzle.jonknoll.dev",
   video_url: "triangle_puzzle.mp4",
   // color:
 };
@@ -90,7 +90,7 @@ const triangle_puzzle = {
 const static_fonts = {
   id: "static_fonts",
   name: "Static Fonts",
-  url: "https://static-fonts.joshuapowell.dev",
+  url: "https://static-fonts.jonknoll.dev",
   video_url: "static_fonts.mp4",
   // color:
 };
@@ -99,7 +99,7 @@ const doughnut = {
   id: "doughnut",
   name: "How to Doughnut?",
   video_url: "doughnut.mp4",
-  url: "https://doughnut.joshuapowell.dev",
+  url: "https://doughnut.jonknoll.dev",
   // color:
 };
 
@@ -107,7 +107,7 @@ const change_blindness = {
   id: "change_blindness",
   name: "Change Blindness",
   video_url: "change_blindness.mp4",
-  url: "https://change-blindness.joshuapowell.dev",
+  url: "https://change-blindness.jonknoll.dev",
   // color:
 };
 
@@ -115,17 +115,14 @@ const cubrr = {
   id: "cubrr",
   name: "Cubrr",
   video_url: "cubrr.mp4",
-  url: "https://cubrr.joshuapowell.dev",
+  url: "https://cubrr.jonknoll.dev",
   // color:
 };
 
 export const categories = [
   {
-    id: "websites",
-    name: "Websites",
-    headline: "Websites I've built",
-    description:
-      "I have built a number of websites for clients and personal projects. Here are a few of my favorites.",
+    id: "professional",
+    name: "Professional",
     projects: [
       cac,
       inbound,
@@ -137,20 +134,9 @@ export const categories = [
     ],
   },
   {
-    id: "apps",
-    name: "Apps",
-    headline: "Apps I've built",
-    description:
-      "I have built a number of apps for clients and personal projects. Here are a few of my favorites.",
-    projects: [fifteen, numberish, triangle_puzzle],
-  },
-  {
-    id: "side_projects",
-    name: "Side Projects",
-    headline: "Side Projects",
-    description:
-      "I have built a number of side projects. Here are a few of my favorites.",
-    projects: [static_fonts, doughnut, change_blindness, cubrr],
+    id: "personal",
+    name: "Personal",
+    projects: [fifteen, numberish, static_fonts, doughnut, change_blindness, cubrr],
   },
 ];
 

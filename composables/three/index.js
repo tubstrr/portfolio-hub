@@ -19,16 +19,16 @@ import {
 const INITIAL_TIME = randomize(0, 5000);
 const INITIAL_CAMERA_ROTATION = {
   time: {
-    start: 500,
+    start: 1500,
     end: 4000,
     // end: 1500,
   },
   x: {
-    start: 120 * (Math.PI / 180),
+    start: 10 * (Math.PI / 180),
     end: 0,
   },
   y: {
-    start: 180 * (Math.PI / 180), // Convert 10 degrees to radians
+    start: 90 * (Math.PI / 180), // Convert 10 degrees to radians
     end: 0,
   },
   z: {

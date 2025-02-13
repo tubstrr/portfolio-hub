@@ -7,7 +7,7 @@ const { $bus } = useNuxtApp();
 import { categories } from "@/assets/cms";
 
 // Consts
-const DEBUG = true;
+const DEBUG = 0;
 
 const hasStarted = ref(false);
 
@@ -212,6 +212,7 @@ onBeforeUnmount(() => {
       <ClientOnly>
         <pre
           class="debug"
+          v-if="DEBUG"
         >
 {
   "animationState": {{animationState}},

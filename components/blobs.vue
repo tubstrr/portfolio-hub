@@ -38,6 +38,6 @@ onBeforeUnmount(() => {
 }
 #background_canvas.v-aos-entered {
   opacity: 1;
-  transition: opacity 1s;
+  transition: 2s ease 1s;
 }
 </style>
