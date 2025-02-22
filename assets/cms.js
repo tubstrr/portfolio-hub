@@ -69,6 +69,7 @@ const fifteen = {
   url: "https://15-puzzle.jonknoll.dev",
   video_url: "15.mp4",
   color: "#004643",
+  dark_color: "#6eb784",
 };
 
 const numberish = {
