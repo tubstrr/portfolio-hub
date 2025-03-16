@@ -77,7 +77,8 @@ const numberish = {
   name: "Numberish",
   url: "https://numberish.jonknoll.dev",
   video_url: "numberish.mp4",
-  // color:
+  color: "#000000",
+  dark_color: "#ffffff",
 };
 
 const triangle_puzzle = {
@@ -85,7 +86,8 @@ const triangle_puzzle = {
   name: "Triangle Puzzle",
   url: "https://triangle-puzzle.jonknoll.dev",
   video_url: "triangle_puzzle.mp4",
-  // color:
+  color: "#000000",
+  dark_color: "#ffffff",
 };
 
 const static_fonts = {
@@ -93,7 +95,8 @@ const static_fonts = {
   name: "Static Fonts",
   url: "https://static-fonts.jonknoll.dev",
   video_url: "static_fonts.mp4",
-  // color:
+  color: "#000000",
+  dark_color: "#ffffff",
 };
 
 const doughnut = {
@@ -101,6 +104,8 @@ const doughnut = {
   name: "How to Doughnut?",
   video_url: "doughnut.mp4",
   url: "https://doughnut.jonknoll.dev",
+  color: "#000000",
+  dark_color: "#ffffff",
   // color:
 };
 
@@ -109,6 +114,8 @@ const change_blindness = {
   name: "Change Blindness",
   video_url: "change_blindness.mp4",
   url: "https://change-blindness.jonknoll.dev",
+  color: "#000000",
+  dark_color: "#ffffff",
   // color:
 };
 
@@ -117,6 +124,8 @@ const cubrr = {
   name: "Cubrr",
   video_url: "cubrr.mp4",
   url: "https://cubrr.jonknoll.dev",
+  color: "#000000",
+  dark_color: "#ffffff",
   // color:
 };
 
@@ -137,7 +146,14 @@ export const categories = [
   {
     id: "personal",
     name: "Personal",
-    projects: [fifteen, numberish, static_fonts, doughnut, change_blindness, cubrr],
+    projects: [
+      fifteen,
+      numberish,
+      static_fonts,
+      doughnut,
+      change_blindness,
+      cubrr,
+    ],
   },
 ];
 
