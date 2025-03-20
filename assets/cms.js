@@ -77,8 +77,8 @@ const numberish = {
   name: "Numberish",
   url: "https://numberish.jonknoll.dev",
   video_url: "numberish.mp4",
-  color: "#000000",
-  dark_color: "#ffffff",
+  color: "#00c951",
+  dark_color: "#05df72",
 };
 
 const triangle_puzzle = {
