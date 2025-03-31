@@ -201,6 +201,14 @@ onBeforeUnmount(() => {
   window.removeEventListener("scroll", forceAssetPreload);
   window.removeEventListener("scroll", updateAnimationState);
 });
+
+// SEO
+useHead({
+  title: 'Jonathan Knoll - Full-stack Software Engineer',
+  meta: [
+    { name: 'description', content: 'Jonathan Knoll is a full stack software engineer with 10+ years of experience building fast, scalable web applications. From leading dev teams to shipping work for Fortune 500 clients, he specializes in React, Python, WordPress, and cloud infrastructure. Available for remote opportunities.' }
+  ],
+})
 </script>
 
 <template>

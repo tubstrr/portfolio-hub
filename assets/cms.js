@@ -95,8 +95,8 @@ const static_fonts = {
   name: "Static Fonts",
   url: "https://static-fonts.jonknoll.dev",
   video_url: "static_fonts.mp4",
-  color: "#000000",
-  dark_color: "#ffffff",
+  color: "#3d6fb1",
+  dark_color: "#8bb5cb",
 };
 
 const doughnut = {
@@ -104,8 +104,8 @@ const doughnut = {
   name: "How to Doughnut?",
   video_url: "doughnut.mp4",
   url: "https://doughnut.jonknoll.dev",
-  color: "#000000",
-  dark_color: "#ffffff",
+  color: "#3d6fb1",
+  dark_color: "#edeeef",
   // color:
 };
 
@@ -151,7 +151,7 @@ export const categories = [
       numberish,
       static_fonts,
       doughnut,
-      change_blindness,
+      // change_blindness,
       cubrr,
     ],
   },
