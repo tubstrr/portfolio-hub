@@ -51,6 +51,7 @@ onBeforeUnmount(() => {
       autoplay
       loop
       :poster="`/projects/${mp4ToWebP(video_url)}`"
+      playsinline
     >
       <source :src="`/projects/${video_url}`" type="video/mp4" />
     </video>
